@@ -8,20 +8,21 @@ import {
     $input as $roomname,
 } from './CreateRoom/model';
 
-export namespace Room {
-    export interface State {
-        roomId: string;
-        linkToRoom: string;
-    }
+export interface Room {
+    roomId: string;
+    linkToRoom: string;
+}
+
+export interface State {
+    rooms: Room[];
 }
 
 export interface UserData {
     name: string;
 }
 
-const initialState: Room.State = {
-    roomId: '',
-    linkToRoom: '',
+const initialState: State = {
+    rooms: [],
 };
 
 export const fxCreateRoom = createEffect({
@@ -37,8 +38,10 @@ export const fxCreateRoom = createEffect({
 export const $store = createStore(initialState);
 $store.on(fxCreateRoom.doneData, (store, roomId) => ({
     ...store,
-    roomId,
-    linkToRoom: `http://localhost:3000/room/${roomId}`,
+    rooms: [...store.rooms, {
+        roomId,
+        linkToRoom: `http://localhost:3000/room/${roomId}`,
+    }],
 }));
 
 const userInitialState: UserData = {
