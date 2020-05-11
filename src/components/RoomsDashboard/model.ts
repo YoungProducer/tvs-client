@@ -3,8 +3,9 @@ import axios from 'axios';
 import { RoomsDashboard } from '.';
 
 export interface Room {
-    roomId: string;
-    linkToRoom: string;
+    name: string;
+    id: string;
+    link: string;
 }
 
 export type RoomsState = Room[];
@@ -15,22 +16,30 @@ export interface UserData {
 
 const initialState: RoomsState = [];
 
+export interface CreateRoomResponse {
+    room: {
+        id: string;
+        name: string;
+    };
+}
+
 export const fxCreateRoom = createEffect({
     handler: async (username: string) => {
         const response = await axios.post('/room', {
             username,
         });
 
-        return response.data as string;
+        return response.data as CreateRoomResponse;
     },
 });
 
 export const $store = createStore(initialState);
-$store.on(fxCreateRoom.doneData, (store, roomId) => [
+$store.on(fxCreateRoom.doneData, (store, { room }) => [
     ...store,
     {
-        roomId,
-        linkToRoom: `http://localhost:3000/room/${roomId}`,
+        id: room.id,
+        name: room.name,
+        link: `http://localhost:3000/room/${room.id}`,
     }],
 );
 
