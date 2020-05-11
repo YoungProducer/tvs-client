@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { RoomsDashboard } from './components/RoomsDashboard';
+import { Routes } from './routes';
 
 export const App = () => {
     return (
-        <RoomsDashboard />
+        <Routes />
     );
 };
