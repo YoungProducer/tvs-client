@@ -1,7 +1,7 @@
 import { createEvent, createStore, sample, guard } from 'effector';
 
-import { userUpdated, roomCreated, fxCreateRoom } from '../model';
-import { $input as $roomname } from '../CreateRoom/model';
+import { userUpdated, fxCreateRoom } from '../model';
+import { $input as $roomname, submited as roomCreated } from '../CreateRoom/model';
 
 export const $input = createStore<string>('');
 export const changedInput = createEvent<React.ChangeEvent<HTMLInputElement>>();

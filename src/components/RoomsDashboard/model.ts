@@ -1,6 +1,5 @@
 import { createEvent, createStore, createEffect } from 'effector';
 import axios from 'axios';
-import { RoomsDashboard } from '.';
 
 export interface Room {
     name: string;
@@ -25,7 +24,7 @@ export interface CreateRoomResponse {
 
 export const fxCreateRoom = createEffect({
     handler: async (username: string) => {
-        const response = await axios.post('/room', {
+        const response = await axios.post('http://localhost:4000/rooms', {
             username,
         });
 
