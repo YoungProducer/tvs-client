@@ -23,14 +23,16 @@ export interface CreateRoomResponse {
 }
 
 export const fxCreateRoom = createEffect({
-    handler: async (username: string) => {
+    handler: async (roomName: string) => {
         const response = await axios.post('http://localhost:4000/room', {
-            username,
+            roomName,
         });
 
         return response.data as CreateRoomResponse;
     },
 });
+
+fxCreateRoom.doneData.watch(console.log);
 
 export const $store = createStore(initialState);
 $store.on(fxCreateRoom.doneData, (store, { room }) => [
