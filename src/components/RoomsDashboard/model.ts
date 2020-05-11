@@ -1,22 +1,19 @@
 import { createEvent, createStore, createEffect } from 'effector';
 import axios from 'axios';
+import { RoomsDashboard } from '.';
 
 export interface Room {
     roomId: string;
     linkToRoom: string;
 }
 
-export interface State {
-    rooms: Room[];
-}
+export type RoomsState = Room[];
 
 export interface UserData {
     name: string;
 }
 
-const initialState: State = {
-    rooms: [],
-};
+const initialState: RoomsState = [];
 
 export const fxCreateRoom = createEffect({
     handler: async (username: string) => {
@@ -29,13 +26,13 @@ export const fxCreateRoom = createEffect({
 });
 
 export const $store = createStore(initialState);
-$store.on(fxCreateRoom.doneData, (store, roomId) => ({
+$store.on(fxCreateRoom.doneData, (store, roomId) => [
     ...store,
-    rooms: [...store.rooms, {
+    {
         roomId,
         linkToRoom: `http://localhost:3000/room/${roomId}`,
     }],
-}));
+);
 
 const userInitialState: UserData = {
     name: '',
