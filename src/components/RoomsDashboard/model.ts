@@ -1,12 +1,5 @@
-import { createEvent, createStore, sample, guard, createEffect } from 'effector';
+import { createEvent, createStore, createEffect } from 'effector';
 import axios from 'axios';
-
-import {
-    $joined,
-} from './Join/model';
-import {
-    $input as $roomname,
-} from './CreateRoom/model';
 
 export interface Room {
     roomId: string;
