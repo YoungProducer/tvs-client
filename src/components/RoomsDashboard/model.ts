@@ -24,7 +24,7 @@ export interface CreateRoomResponse {
 
 export const fxCreateRoom = createEffect({
     handler: async (username: string) => {
-        const response = await axios.post('http://localhost:4000/rooms', {
+        const response = await axios.post('http://localhost:4000/room', {
             username,
         });
 
