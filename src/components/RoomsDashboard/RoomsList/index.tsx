@@ -17,7 +17,7 @@ const RoomsList = () => {
             <li key={index} className={styles.room}>
                 <p>{room.name}</p>
                 <button onClick={handleOnClick}>Show more</button>
-                {expanded && <p>Link: <Link to={room.link}>{room.link}</Link></p>}
+                {expanded && <p>Link: <Link to={room.link}>{room.fullLink}</Link></p>}
             </li>
         );
     });

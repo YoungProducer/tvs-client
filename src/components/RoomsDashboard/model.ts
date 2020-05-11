@@ -5,6 +5,7 @@ export interface Room {
     name: string;
     id: string;
     link: string;
+    fullLink: string;
 }
 
 export type RoomsState = Room[];
@@ -40,7 +41,8 @@ $store.on(fxCreateRoom.doneData, (store, { room }) => [
     {
         id: room.id,
         name: room.name,
-        link: `http://localhost:3000/room/${room.id}`,
+        link: `/room/${room.id}`,
+        fullLink: `http://localhost:3000/room/${room.id}`,
     }],
 );
 
