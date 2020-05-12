@@ -9,10 +9,10 @@ type EditorRoom<T = any> =
     & Pick<Room, 'id' | 'name'>
     & {
         users: string[];
-        data: T;
+        data?: T;
     };
 
-type RoomDataState<T> = EditorRoom<T>[];
+type RoomDataState<T> = EditorRoom<T>;
 
 interface JoinRoomPayload {
     roomId: string;
@@ -23,7 +23,11 @@ export const emitJoinRoom = (payload: JoinRoomPayload) => {
     io.emit('join-room', payload);
 };
 
-const initialRoomData: RoomDataState<string> = [];
+const initialRoomData: RoomDataState<string> = {
+    id: '',
+    name: '',
+    users: [],
+};
 
 export const $roomId = createStore<string>('');
 export const changedRoomId = createEvent<string>();
@@ -31,17 +35,10 @@ $roomId.on(changedRoomId, (_, roomId) => roomId);
 
 export const $roomData = createStore<RoomDataState<string>>(initialRoomData);
 export const roomJoined = createEvent<EditorRoom>();
-$roomData.on(roomJoined, (store, incomingRoom) => {
-    const roomExists = store.some(room => room.id === incomingRoom.id);
-    return roomExists
-        ? store.map(room => room.id === incomingRoom.id
-            ? ({
-                ...room,
-                ...incomingRoom,
-            })
-            : room)
-        : [...store, incomingRoom];
-});
+$roomData.on(roomJoined, (store, incomingRoom) => ({
+    ...store,
+    ...incomingRoom,
+}));
 
 const joinRoom = createEvent<JoinRoomPayload>();
 joinRoom.watch(emitJoinRoom);
