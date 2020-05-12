@@ -1,4 +1,4 @@
-import { createEvent, createStore, guard, combine } from 'effector';
+import { createEvent, createStore, guard, combine, sample, forward, Store } from 'effector';
 import socket from 'socket.io-client';
 
 import { Room, $user } from 'components/RoomsDashboard/model';
@@ -19,8 +19,17 @@ interface JoinRoomPayload {
     username: string;
 }
 
+interface ChangeTextPaylaod {
+    roomId: string;
+    value: string;
+}
+
 export const emitJoinRoom = (payload: JoinRoomPayload) => {
     io.emit('join-room', payload);
+};
+
+export const emitChangeText = (payload: ChangeTextPaylaod) => {
+    io.emit('text-change', payload);
 };
 
 const initialRoomData: RoomDataState<string> = {
@@ -35,9 +44,19 @@ $roomId.on(changedRoomId, (_, roomId) => roomId);
 
 export const $roomData = createStore<RoomDataState<string>>(initialRoomData);
 export const roomJoined = createEvent<EditorRoom>();
+export const roomDataChanged = createEvent<React.ChangeEvent<HTMLTextAreaElement>>();
+export const roomDataChangedResponse = createEvent<string>();
 $roomData.on(roomJoined, (store, incomingRoom) => ({
     ...store,
     ...incomingRoom,
+}));
+$roomData.on(roomDataChanged, (store, event) => ({
+    ...store,
+    data: event.currentTarget.value,
+}));
+$roomData.on(roomDataChangedResponse, (store, value) => ({
+    ...store,
+    data: value,
 }));
 
 const joinRoom = createEvent<JoinRoomPayload>();
@@ -54,4 +73,16 @@ guard<JoinRoomPayload>({
     target: joinRoom,
 });
 
-$roomData.watch(console.log);
+export const changeText = createEvent<ChangeTextPaylaod>();
+changeText.watch(emitChangeText);
+
+io.on('text-change-response', roomDataChangedResponse);
+
+sample(
+    $roomId,
+    roomDataChanged,
+    (roomId, event) => changeText({
+        roomId,
+        value: event.currentTarget.value,
+    }),
+);
