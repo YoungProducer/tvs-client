@@ -49,9 +49,9 @@ joinRoom.watch(emitJoinRoom);
 io.on('join-room-response', roomJoined);
 
 guard<JoinRoomPayload>({
-    source: combine($user, $roomId, ($user, $roomId) => ({
-        username: $user.name,
-        roomId: $roomId,
+    source: combine($user, $roomId, (user, roomId) => ({
+        roomId,
+        username: user.name,
     })),
     filter: (data) => data.username.length > 0 && data.roomId.length > 0,
     target: joinRoom,
