@@ -1,12 +1,12 @@
 {
-  "main.css": "/myapp/static/css/main.00cce27d.chunk.css",
-  "main.js": "/myapp/static/js/main.109549fa.chunk.js",
-  "main.js.map": "/myapp/static/js/main.109549fa.chunk.js.map",
-  "runtime~main.js": "/myapp/static/js/runtime~main.98fc9e48.js",
-  "runtime~main.js.map": "/myapp/static/js/runtime~main.98fc9e48.js.map",
-  "static/js/2.fe81640e.chunk.js": "/myapp/static/js/2.fe81640e.chunk.js",
-  "static/js/2.fe81640e.chunk.js.map": "/myapp/static/js/2.fe81640e.chunk.js.map",
-  "index.html": "/myapp/index.html",
-  "static/css/main.00cce27d.chunk.css.map": "/myapp/static/css/main.00cce27d.chunk.css.map",
-  "static/media/index.css": "/myapp/static/media/ProductSans-Light.dc226ad8.eot"
+  "main.css": "/tvs/static/css/main.8a2aa0b2.chunk.css",
+  "main.js": "/tvs/static/js/main.109549fa.chunk.js",
+  "main.js.map": "/tvs/static/js/main.109549fa.chunk.js.map",
+  "runtime~main.js": "/tvs/static/js/runtime~main.8d41ed90.js",
+  "runtime~main.js.map": "/tvs/static/js/runtime~main.8d41ed90.js.map",
+  "static/js/2.59d860ef.chunk.js": "/tvs/static/js/2.59d860ef.chunk.js",
+  "static/js/2.59d860ef.chunk.js.map": "/tvs/static/js/2.59d860ef.chunk.js.map",
+  "index.html": "/tvs/index.html",
+  "static/css/main.8a2aa0b2.chunk.css.map": "/tvs/static/css/main.8a2aa0b2.chunk.css.map",
+  "static/media/index.css": "/tvs/static/media/ProductSans-Light.dc226ad8.eot"
 }
