@@ -35,5 +35,3 @@ guard({
     filter: $joined,
     target: fxCreateRoom,
 });
-
-$joined.watch(console.log);

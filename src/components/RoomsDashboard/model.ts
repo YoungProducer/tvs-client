@@ -33,8 +33,6 @@ export const fxCreateRoom = createEffect({
     },
 });
 
-fxCreateRoom.doneData.watch(console.log);
-
 export const $store = createStore(initialState);
 $store.on(fxCreateRoom.doneData, (store, { room }) => [
     ...store,
